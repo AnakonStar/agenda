@@ -1,0 +1,15 @@
+@mixin no-padding {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin align-center {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+@mixin full-screen {
+    height: 100%;
+    width: 100%;
+}
