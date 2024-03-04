@@ -36,6 +36,7 @@ export default function OpenContactContainer({ setIdToEdit, selectedContact, set
             setNome('')
             setTelefone('')
         }
+        setSelectedContact()
     }
 
     function handleDeleteContact() {
