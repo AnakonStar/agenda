@@ -21,6 +21,10 @@ main {
     @include align-center;
 }
 
+button {
+    cursor: pointer;
+}
+
 //InputStylized 
 
 .inputStylized {
@@ -105,13 +109,13 @@ main {
             padding: 0;
 
             .contactsListName {
-                padding: 0.8rem 0.8rem;
                 border-bottom: #CCCCCC 1px solid;
                 margin: 0;
 
                 button {
                     color: #000;
                     @include full-screen;
+                    padding: 0.8rem 0.8rem;
                     text-align: left;
                     font-size: 1rem;
                     background: transparent;
