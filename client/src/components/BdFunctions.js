@@ -2,20 +2,17 @@ import axios from "axios";
 
 const fetchAgenda = async (setData) => {
     try {
-        const response = await axios.get('http://localhost:5000/contatos')
+        const response = await axios.get('http://localhost:5000/api/contatos')
         setData(response.data)
     } catch (error) {
         console.error('Erro ao puxar os contatos', error)
     }
-
 }
 
-const addNewContact = async (nome, email, telefone, data, setData) => {
+const addNewContact = async (contato, data, setData) => {
     try {
-        const response = await axios.post('http://localhost:5000/contatos', {
-            nome,
-            email,
-            telefone
+        const response = await axios.post('http://localhost:5000/api/contatos', {
+            contato
         })
 
         setData([...data, response.data])
@@ -24,16 +21,14 @@ const addNewContact = async (nome, email, telefone, data, setData) => {
     }
 }
 
-const editContact = async (id, nome, email, telefone, data, setData) => {
+const editContact = async (id, contato, data, setData) => {
     try {
-        await axios.put(`http://localhost:5000/contatos/${id}`, {
-            nome,
-            email,
-            telefone
+        await axios.put(`http://localhost:5000/api/contatos/${id}`, {
+            contato
         })
 
         const updatedData = data.map((item) =>
-            item.id === id ? { ...data, nome: nome, email: email, telefone: telefone } : item
+            item.id === id ? { ...data, contato } : item
         );
 
         setData(updatedData)
@@ -44,7 +39,7 @@ const editContact = async (id, nome, email, telefone, data, setData) => {
 
 const deleteContact = async (id, data, setData) => {
     try {
-        await axios.delete(`http://localhost:5000/contatos/${id}`)
+        await axios.delete(`http://localhost:5000/api/contatos/${id}`)
 
         const updatedData = data.filter(item => item.id !== id)
         setData(updatedData)
