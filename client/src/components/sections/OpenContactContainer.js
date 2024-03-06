@@ -13,15 +13,28 @@ export default function OpenContactContainer({ setIdToEdit, selectedContact, set
         handleEditAndAddBtn()
     }, [isToEdit])
 
+    const emailValidation = (email) => {
+        let re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    };
+
+    function telValidation(telefone) {
+        let re = /^[0-9]+$/;
+        return re.test(telefone);
+    }
+
+    function clearInputs() {
+        setEmail('')
+        setNome('')
+        setTelefone('')
+    }
+
     function handleAddNewContact() {
-        if (!nome || !email || !telefone || telefone.length < 11) {
-            console.log('Preencha todos os campos')
+        if (!nome || !email || !telefone || telefone.length < 11 || !emailValidation(email) || !telValidation(telefone)) {
+            alert('Preencha todos os campos corretamente')
         } else {
             addNewContact({ nome, email, telefone }, contatosData, setContatosData)
-
-            setEmail('')
-            setNome('')
-            setTelefone('')
+            clearInputs()
         }
     }
 
@@ -32,9 +45,7 @@ export default function OpenContactContainer({ setIdToEdit, selectedContact, set
             setNome(selectedContact.nome)
             setTelefone(selectedContact.telefone)
         } else {
-            setEmail('')
-            setNome('')
-            setTelefone('')
+            clearInputs()
         }
         setSelectedContact()
     }
@@ -46,7 +57,7 @@ export default function OpenContactContainer({ setIdToEdit, selectedContact, set
     }
 
     function handleEditContact() {
-        if (!nome || !email || !telefone || telefone.length < 11) {
+        if (!nome || !email || !telefone || telefone.length < 11 || !emailValidation(email) || !telValidation(telefone)) {
             console.log('Preencha todos os campos corretamente')
         } else {
             editContact(
